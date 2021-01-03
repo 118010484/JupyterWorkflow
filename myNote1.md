@@ -91,4 +91,4 @@ plot(decomp)
 ![](myNote1_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 trend captures the mean, seasonality captures the fluctuations pattern,
-random
+random.
