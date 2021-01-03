@@ -41,10 +41,6 @@ attributes(AP) # in a year we have 12 data points from year 1949 to 1960 somethi
     ## $class
     ## [1] "ts"
 
-``` r
-plot(AP)
-```
-
 ![](myNote1_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> The number
 of passengers are gradually going up. But there is also some amount of
 seasonality (there are periods of the year which are higher, some other

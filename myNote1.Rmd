@@ -22,7 +22,7 @@ ts(AP, frequency=12, start=c(1494,1)) # because we have monthly data from 1494 f
 attributes(AP) # in a year we have 12 data points from year 1949 to 1960 something month
 ```
 
-```{r}
+```{r echo=FALSE}
 plot(AP)
 ```
 The number of passengers are gradually going up. But there is also some amount of seasonality (there are periods of the year which are higher, some other periods are lower). This time series is definitely not stationary (THIS IS A PROBLEM)
