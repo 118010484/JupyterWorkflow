@@ -5,5 +5,6 @@ output: html_notebook
 
 ```{r}
 print("Testing 1")
+print("Testing 2")
 ```
 
