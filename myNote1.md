@@ -41,10 +41,54 @@ attributes(AP) # in a year we have 12 data points from year 1949 to 1960 somethi
     ## $class
     ## [1] "ts"
 
-![](myNote1_files/figure-gfm/unnamed-chunk-4-1.png)<!-- --> The number
-of passengers are gradually going up. But there is also some amount of
-seasonality (there are periods of the year which are higher, some other
-periods are lower). This time series is definitely not stationary (THIS
-IS A PROBLEM)
+![](myNote1_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
-What can we do? Log transformation
+The number of passengers are gradually going up. But there is also some
+amount of seasonality (there are periods of the year which are higher,
+some other periods are lower). This time series is definitely not
+stationary (THIS IS A PROBLEM)
+
+## What can we do? Log transformation (to reduce fluctuations/std)
+
+``` r
+AP <- log(AP)
+plot(AP)
+```
+
+![](myNote1_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+## Decomposition of additive time series
+
+``` r
+decomp <- decompose(AP)
+decomp$figure
+```
+
+    ##  [1] -0.085815019 -0.114412848  0.018113355 -0.013045611 -0.008966106
+    ##  [6]  0.115392997  0.210816435  0.204512399  0.064836351 -0.075271265
+    ## [11] -0.215845612 -0.100315075
+
+\-0.0858 for jan, -0.1144 for feb, etc.
+
+``` r
+plot(decomp$figure,
+     type="b",
+     xlab='Month',
+     ylab="Seasonality Index",
+     col="blue",
+     las = 2) # make the numbers appear vertical
+```
+
+![](myNote1_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+Peaks at July. July has 20% more volume than average. November has 20%
+less volume than average
+
+``` r
+plot(decomp)
+```
+
+![](myNote1_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+trend captures the mean, seasonality captures the fluctuations pattern,
+random
