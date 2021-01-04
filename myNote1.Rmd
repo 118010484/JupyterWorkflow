@@ -128,6 +128,36 @@ dark = 80% CI, light = 95% CI
 accuracy(f)
 ```
 
+# Video 3: Time Series Clustering
+## Data Preparation, Calculate Distances, Hierarchical Clustering
+
+```{r}
+data <- read.table(file.choose(),header=F,sep="")
+str(data)
+```
+```{r}
+plot(data[,60]) # plot all rows, 60th column
+```
+This is time series data, we'll link the dots with lines
+```{r}
+plot(data[,60],type="l") # plot all rows, 60th column
+```
+
+We have 6 different patterns (0 to 100, 100 to 200, etc.)
+```{r}
+# Let's sample
+j <- c(5,105,205,305,405,505)
+sample <- t(data[j,])
+plot.ts(sample,
+        main = "Time-series Plot",
+        col = "blue",
+        type = "b")
+```
+## We need to prepare the data before clustering
+
+```{r}
+
+```
 
 
 
