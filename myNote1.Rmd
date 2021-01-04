@@ -55,4 +55,79 @@ Peaks at July. July has 20% more volume than average. November has 20% less volu
 plot(decomp)
 ```
 
-trend captures the mean, seasonality captures the fluctuations pattern, random
+trend captures the mean, seasonality captures the fluctuations pattern, random.
+
+# 2nd video: ARIMA - Autoregressive Integrated Moving Average
+## ACF & PACF Plots
+## Ljung-Box Test
+## Residual Plot
+## Forecast
+```{r}
+#install.packages("forecast")
+library(forecast)
+# find BEST arima model based on AIC or BIC value
+model <- auto.arima(AP)
+model
+```
+
+The data used was AP. p (AR order) = 0, d (degree of differencing) = 1, q (Moving Average order) = 1
+
+```{r}
+attributes(model)
+```
+```{r}
+model$coef
+```
+
+## ACF & PACF Plots
+```{r}
+acf(model$residuals, main="Correlogram")
+```
+
+The blue dotted lines are significant bounds. only lag 0 is outside the significant bounds.
+
+```{r}
+pacf(model$residuals, main="Partial Correlogram")
+```
+
+All lags are within the significant bounds.
+
+## What if some lags ACF values are in the verge of violating the bounds??
+
+## Ljung-Box Test
+```{r}
+Box.test(model$residuals, lag=20, type='Ljung-Box')
+```
+We are most interested in the p-value. If pv < 0.05, we can say there is a statistical significance. Since we got pv = 0.6, there is little evidence of non zero autocorrelation in the insample forecast errors at lags 1 to 20 (not violating the bounds)
+
+## Residual Plot (to confirm no problem with the model)
+```{r}
+hist(model$residuals,
+     col="red",
+     xlab="Error",
+     main = "Histogram of Residuals",
+     freq = FALSE)
+# It should be like normal distribution which is what we want
+lines(density(model$residuals))
+
+```
+
+The model mimics the shape of std normal dist. We can be confident to move on to the forecasting.
+
+## Forecasting
+```{r}
+f <- forecast(model, 48) # let's do forecasting for the next 48 months
+library(ggplot2)
+autoplot(f)
+```
+
+dark = 80% CI, light = 95% CI
+
+```{r}
+# calculate standard time series measure
+accuracy(f)
+```
+
+
+
+
